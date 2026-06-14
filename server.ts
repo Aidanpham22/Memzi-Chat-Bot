@@ -64,8 +64,12 @@ CRITICAL INSTRUCTIONS:
 5. Do NOT roleplay as an ancient fantasy wizard or speak in long fantasy paragraphs. Keep answers helpful, clear, and structured in 1-3 short, easy-to-read paragraphs. Mention Lumo warmly with a sprout emoji "🌱".
 `;
 
-      // Convert messages to Gemini format { role: 'user' | 'model', parts: [{ text: string }] }
-      const contents = messages.map((m: any) => {
+      // Find the first user message in the history to ensure the Gemini request starts with a 'user' role
+      const firstUserIndex = messages.findIndex((m: any) => m.sender === "user");
+      const activeMessages = firstUserIndex !== -1 ? messages.slice(firstUserIndex) : messages;
+
+      // Convert active messages to Gemini format { role: 'user' | 'model', parts: [{ text: string }] }
+      const contents = activeMessages.map((m: any) => {
         const role = m.sender === "user" ? "user" : "model";
         return {
           role,

@@ -72,7 +72,17 @@ export default function ChatWidget() {
         }),
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
+      let data: any = {};
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseErr) {
+        if (!response.ok) {
+          throw new Error(`Server error (${response.status}): This can happen if the backend server is reloading or if there is a temporary connection issue. Please try again soon.`);
+        } else {
+          throw new Error("Received an unexpected data format from the server.");
+        }
+      }
 
       if (!response.ok) {
         throw new Error(data.error || "The server returned an unexpected error.");
