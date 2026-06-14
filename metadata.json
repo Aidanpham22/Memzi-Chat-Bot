@@ -1,0 +1,6 @@
+{
+  "name": "Ask Lumo",
+  "description": "A cozy fantasy FAQ chatbot for Memzi Living World, featuring Lumo the sprout spirit companion answering questions about HSK Chinese learning.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
